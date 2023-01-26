@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSubsystem;
 
 public class UpCmd extends CommandBase{
-    private ArmSubsystem ar_subsystem;
+    /*private ArmSubsystem ar_subsystem;
 
     public UpCmd(ArmSubsystem ar_subs){
         this.ar_subsystem = ar_subs;
@@ -37,5 +37,5 @@ public class UpCmd extends CommandBase{
     @Override
     public boolean isFinished(){
         return false;
-    }
+    }*/
 }

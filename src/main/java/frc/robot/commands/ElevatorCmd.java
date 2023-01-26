@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 public class ElevatorCmd extends CommandBase{
-    private int steps;
+    /*private int steps;
     private ElevatorSubsystem e_subsystem;
     public ElevatorCmd(ElevatorSubsystem e_subsystem){
         this.e_subsystem = e_subsystem;
@@ -66,5 +66,5 @@ public class ElevatorCmd extends CommandBase{
     @Override
     public boolean isFinished(){
         return steps == 4;
-    }
+    }*/
  }

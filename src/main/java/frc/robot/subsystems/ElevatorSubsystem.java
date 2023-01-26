@@ -5,45 +5,42 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorSubsystem extends SubsystemBase{
     private CANSparkMax leftF = new CANSparkMax(6, MotorType.kBrushless);
     private CANSparkMax leftB = new CANSparkMax(3, MotorType.kBrushless);
-    private PIDController pController = new PIDController(0.015, 0, 0);
-    private Encoder enc = new Encoder(0, 1, false, EncodingType.k4X);
-    private double speed = 0.01;
-    private double setPoint = 0;
-    private double sensorPosition = enc.get();
-    private double errorSum = 0;
-    private double finalTime = 0;
-
-    private double error = setPoint - sensorPosition;
-
-    private double outputSpeed = 0.015 * error;
+    private final double kp = 0.1;
+    private final double ki = 0;
+    private final double kd = 0;
+    private final PIDController pController = new PIDController(kp, ki, kd);
+    private final RelativeEncoder rEnc;
+    private double setpoint;
 
     public ElevatorSubsystem(){
-        
+        rEnc = leftF.getEncoder();
     }
 
     public double getEncoder(){
-        return enc.get();
+        return rEnc.getPosition();
     }
 
     public void resetEncoder(){
-        enc.reset();
+        rEnc.setPosition(0);
     }
 
-    public void elevatorUp(){
-        leftF.set(speed);
-        leftB.set(speed);
+    public double calcError(){
+        return setpoint - getEncoder();
     }
-    
-    public void elevatorDown(){
-        leftF.set(-speed);
-        leftB.set(-speed);
+
+    public double motorOutput(){
+        return kp * calcError();
+    }
+
+    public void setElevator(){
+        leftF.set(motorOutput());
+        leftB.set(motorOutput());
     }
 
     public void elevatorStop(){
@@ -53,6 +50,6 @@ public class ElevatorSubsystem extends SubsystemBase{
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("Encoder: ", enc.get());
+        SmartDashboard.putNumber("Encoder: ", rEnc.getPosition());
     }
 }
