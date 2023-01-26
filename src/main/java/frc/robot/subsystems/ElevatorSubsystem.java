@@ -17,6 +17,8 @@ public class ElevatorSubsystem extends SubsystemBase{
     private double speed = 0.01;
     private double setPoint = 0;
     private double sensorPosition = enc.get();
+    private double errorSum = 0;
+    private double finalTime = 0;
 
     private double error = setPoint - sensorPosition;
 
