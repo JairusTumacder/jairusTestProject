@@ -16,8 +16,9 @@ public class StopElevatorCmd extends CommandBase{
     }
     @Override
     public void execute(){
-        e_subsystem.elevatorStop();
+
     }
+    
     @Override
     public void end(boolean interrupted){
 

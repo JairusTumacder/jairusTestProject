@@ -50,11 +50,6 @@ public class ElevatorSubsystem extends SubsystemBase{
         leftB.set(calcP() + calcI() + calcD());
     }
 
-    public void elevatorStop(){
-        leftF.stopMotor();
-        leftB.stopMotor();
-    }
-
     @Override
     public void periodic(){
         SmartDashboard.putNumber("Encoder: ", rEnc.getPosition());
