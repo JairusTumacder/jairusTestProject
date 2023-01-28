@@ -52,8 +52,8 @@ public class RobotContainer {
     //new JoystickButton(xController, 1).whileFalse((new StopCmd(a_subsystem)));
 
     new JoystickButton(xController, 2).onTrue(new ElevatorFloorCmd1(e_subsystem, 30));
-    //new JoystickButton(xController, 3).onTrue(new ElevatorFloorCmd2(e_subsystem));
-    //new JoystickButton(xController, 8).onTrue(new ElevatorFloorCmd3(e_subsystem));
+    new JoystickButton(xController, 3).onTrue(new ElevatorFloorCmd2(e_subsystem, 60));
+    new JoystickButton(xController, 8).onTrue(new ElevatorFloorCmd3(e_subsystem, 80));
     
     //new JoystickButton(xController, 2).whileFalse(new DownCmd(a_subsystem));
     //new JoystickButton(xController, 3).onTrue(new ElevatorCmd(e_subsystem));

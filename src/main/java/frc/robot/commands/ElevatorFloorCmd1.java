@@ -20,6 +20,7 @@ public class ElevatorFloorCmd1 extends CommandBase{
     public void initialize(){
         SmartDashboard.putNumber("Elevator Encoder: ", e_subsystem.getEncoder());
         e_subsystem.resetEncoder();
+        setpoint = 30;
         
     }
 
