@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveSubsystem extends SubsystemBase{
     /*private final CANSparkMax leftF = new CANSparkMax(6, MotorType.kBrushless);
@@ -40,6 +41,6 @@ public class DriveSubsystem extends SubsystemBase{
     }
     @Override
     public void periodic(){
-
+        SmartDashboard.putNumber("Encoder:", );
     }*/
 }

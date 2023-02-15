@@ -51,19 +51,19 @@ public class RobotContainer {
     //new JoystickButton(xController, 1).whileTrue((new DownCmd(a_subsystem)));
     //new JoystickButton(xController, 1).whileFalse((new StopCmd(a_subsystem)));
 
-    new JoystickButton(xController, 2).onTrue(new ElevatorFloorCmd1(e_subsystem, 30));
-    new JoystickButton(xController, 3).onTrue(new ElevatorFloorCmd2(e_subsystem, 60));
-    new JoystickButton(xController, 8).onTrue(new ElevatorFloorCmd3(e_subsystem, 80));
+    new JoystickButton(xController, 2).onTrue(new ElevatorFloorCmd1(e_subsystem));
+    new JoystickButton(xController, 3).onTrue(new ElevatorFloorCmd2(e_subsystem));
+    new JoystickButton(xController, 8).onTrue(new ElevatorFloorCmd3(e_subsystem));
     
     //new JoystickButton(xController, 2).whileFalse(new DownCmd(a_subsystem));
     //new JoystickButton(xController, 3).onTrue(new ElevatorCmd(e_subsystem));
     //new JoystickButton(xController, 3).whileTrue((new ElevatorUpCmd(e_subsystem)));
     //new JoystickButton(xController, 3).whileFalse((new StopElevatorCmd(e_subsystem)));
     //new JoystickButton(xController, 8).whileTrue((new ElevatorDownCmd(e_subsystem)));
-    //new JoystickButton(xController, 8).whileFalse((new StopElevatorCmd(e_subsystem)));
+    new JoystickButton(xController, 8).whileFalse((new StopElevatorCmd(e_subsystem)));
 
-    //new JoystickButton(xController, 6).onTrue(new ResetEncoderCmd(e_subsystem));
-    //new JoystickButton(xController, 7).onTrue(new ResetArmEncoder(a_subsystem));
+    new JoystickButton(xController, 6).onTrue(new ResetEncoderCmd(e_subsystem));
+    new JoystickButton(xController, 7).onTrue(new ResetArmEncoder(a_subsystem));
 
     //new JoystickButton(xController, 2).onTrue(new ArcadeDriveCmd(d_subsystem, () -> xController.getLeftX(), () -> xController.getLeftY()));
     //new JoystickButton(xController, 5).onTrue(new DriveCmd(d_subsystem, () -> xController.getLeftY(), () -> xController.getRightY()));

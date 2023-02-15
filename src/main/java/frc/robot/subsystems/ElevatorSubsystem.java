@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ElevatorSubsystem extends SubsystemBase{
     private CANSparkMax leftF = new CANSparkMax(6, MotorType.kBrushless);
     private CANSparkMax leftB = new CANSparkMax(3, MotorType.kBrushless);
-    private final PIDController pid = new PIDController(0.1, 0, 0);
+    private final PIDController pid = new PIDController(0.0007, 0.001, 0);
     private final RelativeEncoder rEnc;
     private double setpoint;
-    private double lastTime = Timer.getFPGATimestamp();
-    private double dT = Timer.getFPGATimestamp() - lastTime;
+    private double before;
 
     public ElevatorSubsystem(){
         rEnc = leftF.getEncoder();
+        pid.setTolerance(5);
     }
 
     public double getEncoder(){
@@ -27,27 +27,38 @@ public class ElevatorSubsystem extends SubsystemBase{
 
     public void resetEncoder(){
         rEnc.setPosition(0);
+    } 
+
+    public void compareErrors(){
+        double after = pid.getPositionError();
+        if(before > 0 && after < 0){
+            pid.reset();
+        }
+        else if(before < 0 && after > 0){
+            pid.reset();
+        }
+        before = pid.getPositionError();
     }
 
-    public double calcErrorSum(){
-        return pid.calculate(getEncoder(), setpoint) * dT;
+    public double calcP(double setpoint){
+        double error = pid.calculate(getEncoder(), setpoint);
+        if(error > 1){
+            return 0.5;
+        }
+        else if(error < -1){
+            return -0.5;
+        }
+        else{
+            return error;
+        }
     }
 
-    public double calcP(){
-        return pid.calculate(getEncoder(), setpoint) * pid.getP();
-    }
-
-    public double calcD(){
-        return pid.getVelocityError() * pid.getD();
-    }
-
-    public double calcI(){
-        return calcErrorSum() * pid.getI();
-    }
-
-    public void setElevator(){
-        leftF.set(calcP() + calcI() + calcD());
-        leftB.set(calcP() + calcI() + calcD());
+    public void setElevator(double setpoint){
+            leftF.set(calcP(setpoint));
+            leftB.set(calcP(setpoint));
+            SmartDashboard.putNumber("P Value: ", calcP(setpoint));
+            SmartDashboard.putNumber("Error Value: ", pid.calculate(getEncoder(), setpoint));
+            SmartDashboard.putNumber("Setpoint", setpoint);
     }
 
     @Override
