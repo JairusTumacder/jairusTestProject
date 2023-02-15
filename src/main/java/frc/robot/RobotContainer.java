@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autos;
 import frc.robot.commands.ElevatorCmd;
 import frc.robot.commands.ElevatorDownCmd;
 import frc.robot.commands.ElevatorFloorCmd1;
@@ -14,7 +13,6 @@ import frc.robot.commands.ElevatorUpCmd;
 import frc.robot.commands.ResetArmEncoder;
 import frc.robot.commands.ResetEncoderCmd;
 import frc.robot.commands.UpCmd;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -32,14 +30,15 @@ import frc.robot.commands.StopCmd;
 import frc.robot.commands.StopElevatorCmd;
 
 public class RobotContainer {
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem d_subsystem = new DriveSubsystem();
   private final ElevatorSubsystem e_subsystem = new ElevatorSubsystem();
   private final ArmSubsystem a_subsystem = new ArmSubsystem();
 
       Joystick joystick1 = new Joystick(0);
       Joystick joystick2 = new Joystick(1);
+
     private final XboxController xController = new XboxController(1);
+
   public RobotContainer() {
     //d_subsystem.setDefaultCommand(new DriveCmd(d_subsystem, () -> joystick1.getRawAxis(1), () -> joystick2.getRawAxis(1)));
       configureBindings();
@@ -70,6 +69,6 @@ public class RobotContainer {
     }
 
   public Command getAutonomousCommand() {
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return null;
   }
 }
