@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ElevatorSubsystem extends SubsystemBase{
     private CANSparkMax leftF = new CANSparkMax(6, MotorType.kBrushless);
     private CANSparkMax leftB = new CANSparkMax(3, MotorType.kBrushless);
-    private final PIDController pid = new PIDController(0.0007, 0.001, 0.00001);
+    private final PIDController pid = new PIDController(0.005, 0.0001, 0.00001);
     private final RelativeEncoder rEnc;
     private double setpoint;
     private double before;
@@ -60,7 +60,7 @@ public class ElevatorSubsystem extends SubsystemBase{
             leftF.set(calcP(setpoint));
             leftB.set(calcP(setpoint));
             SmartDashboard.putNumber("P Value: ", calcP(setpoint));
-            SmartDashboard.putNumber("Error Value: ", pid.calculate(getEncoder(), setpoint));
+            SmartDashboard.putNumber("Error Value: ", pid.getPositionError());
             SmartDashboard.putNumber("Setpoint", setpoint);
     }
 
